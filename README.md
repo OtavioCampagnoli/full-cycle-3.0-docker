@@ -40,3 +40,44 @@ No nosso Dockerfile, o robô (nosso container) **sempre vai "echo" (falar)** o q
 Então, ele vai "falar Olá, Mundo!".
 
 Mas se você rodar o container e disser para ele "falar Sol!", ele vai "falar Olá, Sol!". Ele sempre usa o "Olá," do `ENTRYPOINT` e junta com o que você manda ou com o `CMD` padrão.
+
+# Trabalhando com Imagens - Docker entrypoint exec
+
+- O ENTRYPOINT define o comando principal da imagem.
+- O CMD define o comando padrão, que pode ser sobrescrito ao rodar o container.
+- Se passar um comando ao iniciar o container (ex: bash), ele substitui o CMD.
+```dockerfile
+    # Exemplo de Dockerfile
+    FROM ubuntu:latest
+
+    ENTRYPOINT ["echo", "Olá,"]
+    CMD ["Mundo!"]
+```
+
+# Trabalhando com Imagens - Publicando Imagem no DockerHub
+
+- **Listar todos os containers:**  
+  `docker ps -a`
+
+- **Rodar um container em background:**  
+  `docker run -d --name ocampagnoli-fullcycle-nginx -p 8080:80 ocampagnoli/full-cycle-nginx:latest`
+
+- **Listar containers em execução:**  
+  `docker ps`
+
+- **Listar todas as imagens:**  
+  `docker images -a`  
+  ou  
+  `docker images`
+
+- **Filtrar imagens por status:**  
+  `docker images --filter status=exited`
+
+- **Publicar imagem no DockerHub:**  
+  `docker push ocampagnoli/full-cycle-nginx:latest`
+
+- **Criar imagem a partir do Dockerfile:**  
+  `docker build -t ocampagnoli/full-cycle-nginx .`
+
+- **Remover containers parados:**  
+  `docker rm -f $(docker ps -a -f status=exited -q)`
