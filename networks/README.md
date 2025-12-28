@@ -10,3 +10,68 @@
   - Exemplo: `docker network create -d overlay my_overlay_network`
 - macvlan: Permite atribuir um endereço MAC ao container, fazendo com que ele apareça como um dispositivo físico na rede.
   - Exemplo: `docker network create -d macvlan --subnet=192.168.1.0/24 --gateway=192.168.1.1 -o parent=eth0 my_macvlan_network`
+
+# Trabalhando com bridge
+
+## Exemplos práticos com bridge
+
+### Exemplos práticos com bridge
+
+- **Criar uma rede bridge personalizada:**
+
+  ```bash
+  docker network create --driver bridge minharede
+  ```
+
+- **Listar redes existentes:**
+
+  ```bash
+  docker network ls
+  ```
+
+- **Inspecionar detalhes de uma rede:**
+
+  ```bash
+  docker network inspect minharede
+  ```
+
+- **Adicionar um container à rede:**
+
+  ```bash
+  docker network connect minharede meu_container
+  ```
+
+- **Remover um container da rede:**
+
+  ```bash
+  docker network disconnect minharede meu_container
+  ```
+
+- **Remover uma rede:**
+
+  ```bash
+  docker network rm minharede
+  ```
+
+- **Iniciar um container já conectado à rede:**
+
+  ```bash
+  docker run -dit --name ubuntu1 --network minharede ubuntu
+  ```
+
+- **Verificar redes de um container:**
+
+  ```bash
+  docker inspect ubuntu1
+  ```
+
+- **Testar comunicação entre containers na mesma rede:**
+
+  ```bash
+  docker exec -it ubuntu1 ping ubuntu2
+  ```
+
+- **Consultar IP de um container:**
+  ```bash
+  docker exec -it meu_container ip addr show
+  ```
