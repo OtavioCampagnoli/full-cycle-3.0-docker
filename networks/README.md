@@ -15,8 +15,6 @@
 
 ## Exemplos práticos com bridge
 
-### Exemplos práticos com bridge
-
 - **Criar uma rede bridge personalizada:**
 
   ```bash
@@ -74,4 +72,19 @@
 - **Consultar IP de um container:**
   ```bash
   docker exec -it meu_container ip addr show
+  ```
+
+# Trabalhando com host
+
+## Exemplos práticos com host
+
+- **Executar Nginx usando a rede do host:**
+  ```bash
+  docker run -d --name nginx -p 8080:80 --network host nginx
+  ```
+- **Acessar o serviço:**
+  - Abra o navegador e acesse `http://localhost:8080` para ver a página padrão do Nginx.
+- **Verificar a rede do container:**
+  ```bash
+  docker inspect nginx
   ```
