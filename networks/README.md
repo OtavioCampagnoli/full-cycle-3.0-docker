@@ -88,3 +88,18 @@
   ```bash
   docker inspect nginx
   ```
+
+# Container acessando nossa maquina
+
+- **Executar um container com rede host:**
+  ```bash
+  docker run -dit --name meu_container --network host ubuntu
+  ```
+- **Dentro do container, acessar um serviço rodando na máquina host:**
+  ```bash
+  docker exec -it meu_container bash
+  curl http://localhost:porta_do_servico
+  ```
+- **Exemplo prático:**
+  - Se você tiver um servidor web rodando na sua máquina host na porta 4200, pode acessá-lo de dentro do container usando `curl http://localhost:4200` (quando estiver usando a rede `host`).
+  - Caso esteja usando a rede padrão (`bridge`), utilize o hostname especial `host.docker.internal`, assim: `curl http://host.docker.internal:4200`. Esse hostname resolve para o IP da máquina host a partir de containers Docker (disponível nativamente no Docker Desktop e em algumas distribuições Linux recentes; em outras, pode ser necessário configuração adicional).
